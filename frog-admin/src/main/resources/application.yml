@@ -69,7 +69,7 @@ spring:
     username: root
     password: 123456
     #    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.1.156:3306/znwl_agriculture?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+    url: jdbc:mysql://192.168.31.201:3306/znwl_agriculture?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
     driver-class-name: com.mysql.cj.jdbc.Driver
     initial-size: 5                                       # 初始化大小
     min-idle: 10                                          # 最小连接数
@@ -83,7 +83,7 @@ spring:
       # 主库数据源
       master:
         #        url: jdbc:mysql://localhost:3306/frog_agriculture?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        url: jdbc:mysql://192.168.1.156:3306/znwl_agriculture?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://192.168.31.201:3306/znwl_agriculture?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
       username: root
       password: 123456
       # 从库数据源
@@ -294,7 +294,7 @@ mybatis-plus:
 # 区块链配置
 system:
   # 虚拟机IP:端口
-  peers:  192.168.1.157:20200
+  peers:  192.168.31.60:20200
   groupId: 1
   node: 1
   certPath: conf
@@ -315,4 +315,4 @@ mqtt:
   subTopic: "pop"
 # 条形码前端地址
 barcode:
-  path: http://192.168.1.156/originIndex?code=
+  path: http://192.168.31.201/originIndex?code=

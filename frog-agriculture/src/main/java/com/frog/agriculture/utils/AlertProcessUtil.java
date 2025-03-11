@@ -666,6 +666,7 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
      * @return true 如果生成了报警，false 如果没有报警
      */
     private static boolean checkAndProcessSeriousAlert(AlertParams params) {
+
         String alertType = null;
 
         if (params.value < params.thresholds[0]) {
@@ -674,9 +675,13 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
             alertType = "严重高值报警";
         }
 
-        return tryProcessAlert(params, alertType, buildAlertMessage(params, alertType));
+        if (alertType != null) {
+            //检查并处理预警信息                根据告警类型生成告警消息
+            processAlert(params, alertType,  buildAlertMessage(params, alertType));
+            return true;
+        }
+        return false;
     }
-
 
 
 
@@ -715,7 +720,6 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
             return;
         }
 
-
         // 如果不需要报警，检查是否需要预警
         if (checkAndProcessWarning(params)) {
             return;
@@ -724,6 +728,7 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
         // 如果数据恢复正常，更新未处理的预警状态
         updateActiveAlerts(paramName, pastureId, batchId, device);
     }
+
 
 
     /**
@@ -767,7 +772,6 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
 
     }
 
-
     /**
      * 检查并处理预警信息
      *
@@ -786,7 +790,6 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
             generateSeriousAlert(params, alertType, alertMessage);
             return;
         }
-
 
         // 处理预警
         if (alertType.contains("预警")) {
@@ -874,4 +877,147 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
             this.device = device;
         }
     }
+
+
+
+//    /**
+//     * 检查并处理严重报警情况
+//     *
+//     * @param params 告警参数对象
+//     * @return true 如果生成了报警，false 如果没有报警
+//     */
+//    private static boolean checkAndProcessSeriousAlert(AlertParams params) {
+//
+//        String alertType = null;
+//
+//        if (params.value < params.thresholds[0]) {
+//            alertType = "严重低值报警";
+//        } else if (params.value > params.thresholds[1]) {
+//            alertType = "严重高值报警";
+//        }
+//
+//        if (alertType != null) {
+//            //检查并处理预警信息                根据告警类型生成告警消息
+//            processAlert(params, alertType,  buildAlertMessage(params, alertType));
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//
+//
+//
+//    /**
+//     * 检查单个参数是否接近或超过阈值，并生成预警信息
+//     *
+//     * @param paramKey  参数键名(如:"temperature","humidity"等)
+//     * @param value     当前参数的实际值
+//     * @param paramName 参数的显示名称(如:"温度","湿度"等)
+//     * @param pastureId 大棚/养殖棚ID
+//     * @param batchId   批次ID
+//     * @param device    设备对象,包含设备ID、名称等信息
+//     */
+//    private static void checkThresholdAndAlert(String paramKey, double value, String paramName, String pastureId, String batchId, Device device) {
+//        // 获取阈值配置
+//        double[] thresholds = ThresholdConfigUtil.getThresholdByKey(paramKey);
+//        if (thresholds == null) {
+//            log.warn("未找到参数 " + paramKey + " 的阈值配置");
+//            return;
+//        }
+//
+//        // 获取阈值缓冲区间
+//        double[] buffers = getThresholdBuffer(paramKey);
+//        double minBuffer = buffers[0];
+//        double maxBuffer = buffers[1];
+//
+//        // 计算预警阈值
+//        double minWarning = thresholds[0] + minBuffer;
+//        double maxWarning = thresholds[1] - maxBuffer;
+//
+//        // 创建参数对象
+//        AlertParams params = new AlertParams(paramKey, paramName, value, thresholds, minWarning, maxWarning, pastureId, batchId, device);
+//
+//        // 首先检查是否需要报警
+//        if (checkAndProcessSeriousAlert(params)) {
+//            return;
+//        }
+//
+//
+//        // 如果不需要报警，检查是否需要预警
+//        if (checkAndProcessWarning(params)) {
+//            return;
+//        }
+//
+//        // 如果数据恢复正常，更新未处理的预警状态
+//        updateActiveAlerts(paramName, pastureId, batchId, device);
+//    }
+//
+//
+//    /**
+//     * 生成报警信息并执行相应的警报操作
+//     * @param params       报警参数数据传输对象
+//     * @param alertType    警告类型（如"严重低值报警"、"严重高值报警"等）
+//     * @param alertMessage 警告消息内容
+//     */
+//    private static void generateSeriousAlert(AlertParams params, String alertType, String alertMessage) {
+//        // 创建基础警告对象  物联网
+//        SensorAlert alert = createBaseAlert(params, alertType, alertMessage);
+//        // 1表示报警级别  物联网
+//        alert.setAlertLevel("1");
+//
+//        //全栈工程师拿到报警信息之后 进行上链操作
+//        try {
+//            Client client = SpringUtils.getBean(Client.class);
+//            SensorAlertService sensorAlertService = SensorAlertService.deploy(client, client.getCryptoSuite().getCryptoKeyPair());
+//
+//            TransactionReceipt transactionReceipt = sensorAlertService.addSensorAlertData(alert.getBatchId(),
+//                    alert.getAlertType(), alert.getAlertMessage(), alert.getThresholdMax(), alert.getThresholdMin(),
+//                    alert.getAlertLevel(), alert.getAlertTime());
+//
+//            if (transactionReceipt.isStatusOK()) {
+//                alert.setContractAddress(sensorAlertService.getContractAddress());
+//            } else {
+//                throw new ServerException("合约地址不存在");
+//            }
+//        } catch (Exception e) {
+//            log.error("上链发生异常" + e.getMessage());
+//            throw new ServerException(ErrorCodeEnum.CONTENT_SERVER_ERROR);
+//        }
+//
+//
+//        // 触发红灯警报  物联网
+//        serialPortUtil.openRedLight();
+//        AudioPlayer.playAlarmSound();
+//
+//        //保存警告信息  物联网
+//        saveAlert(alert, "报警");
+//
+//    }
+//
+//
+//    /**
+//     * 检查并处理预警信息
+//     *
+//     * @param alertType    预警类型
+//     * @param alertMessage 预警消息
+//     */
+//    private static void processAlert(AlertParams params, String alertType, String alertMessage) {
+//
+//        // 如果近期 30 分钟 已存在相同类型预警，则不重复生成
+//        if (hasActiveAlert(params.paramName, alertType, params.pastureId, params.batchId, params.device)) {
+//            return;
+//        }
+//
+//        // 处理报警（严重警告）  物联网
+//        if (alertType.contains("报警")) {
+//            generateSeriousAlert(params, alertType, alertMessage);
+//            return;
+//        }
+//
+//
+//        // 处理预警
+//        if (alertType.contains("预警")) {
+//            generateWarning(params, alertType, alertMessage);
+//        }
+//    }
 }
