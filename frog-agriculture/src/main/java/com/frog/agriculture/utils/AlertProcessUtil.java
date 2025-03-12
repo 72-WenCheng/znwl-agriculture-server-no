@@ -647,7 +647,7 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
             return true;
         }
 
-        // 针对某些参数需做额外阈值检查
+        // 额外阈值检查
         if (shouldCheckBothThresholds(params.paramKey)) {
             alertType = checkWarningThresholds(params.value, params.minWarning, params.maxWarning, params.paramName);
             if (alertType != null) {
@@ -666,15 +666,12 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
      * @return true 如果生成了报警，false 如果没有报警
      */
     private static boolean checkAndProcessSeriousAlert(AlertParams params) {
-
         String alertType = null;
-
         if (params.value < params.thresholds[0]) {
             alertType = "严重低值报警";
-        } else if (params.value > params.thresholds[1]) {
+        }else if (params.value > params.thresholds[1]) {
             alertType = "严重高值报警";
         }
-
         if (alertType != null) {
             //检查并处理预警信息                根据告警类型生成告警消息
             processAlert(params, alertType,  buildAlertMessage(params, alertType));
@@ -682,7 +679,6 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
         }
         return false;
     }
-
 
 
     /**
@@ -715,6 +711,7 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
         // 创建参数对象
         AlertParams params = new AlertParams(paramKey, paramName, value, thresholds, minWarning, maxWarning, pastureId, batchId, device);
 
+
         // 首先检查是否需要报警
         if (checkAndProcessSeriousAlert(params)) {
             return;
@@ -742,6 +739,7 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
         SensorAlert alert = createBaseAlert(params, alertType, alertMessage);
         // 1表示报警级别  物联网
         alert.setAlertLevel("1");
+
 
         //全栈工程师拿到报警信息之后 进行上链操作
         try {
@@ -772,6 +770,7 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
 
     }
 
+
     /**
      * 检查并处理预警信息
      *
@@ -796,6 +795,7 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
             generateWarning(params, alertType, alertMessage);
         }
     }
+
 
     /**
      * 根据告警类型生成告警消息

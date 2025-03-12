@@ -134,9 +134,15 @@ public class SerialPortUtil {
      * 打开红灯（第1个继电器）
      */
     public void openRedLight() {
+        /*
+        *   1F 设备地址  控制器设备地址
+        *   05 功能码 控制单个继电器的开关
+        *   00 00 写入地址  继电器地址
+        *   FF 00 打开此继电器
+        *   8F 84 CRC校验码 用于校验指令完整性
+        */
         writeBytes(hexStringToByteArray("1F 05 00 00 FF 00 8F 84"));
     }
-
 
     /**
      * 关闭红灯（第1个继电器）
@@ -144,6 +150,7 @@ public class SerialPortUtil {
     public void closeRedLight() {
         writeBytes(hexStringToByteArray("1F 05 00 00 00 00 CE 74"));
     }
+
 
 
     /**

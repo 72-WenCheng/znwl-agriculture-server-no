@@ -2,7 +2,7 @@
 bot:
   name: bot
   aiModel: deepseek-r1:14b
-  aiUrl: http://192.168.1.242:11434/api
+  aiUrl: http://192.168.31.207:11434/api
   aiDoc: chat
   stream: false
   aiTimeoutMsec: 60000
@@ -294,16 +294,16 @@ mybatis-plus:
 # 区块链配置
 system:
   # 虚拟机IP:端口
-  peers:  192.168.31.60:20200
+  peers:  192.168.31.101:20200
   groupId: 1
   node: 1
   certPath: conf
   # 私钥
-  privateKey: "b4499973e654a2327c6f1f5d3936475c18d1ec25269a3028aceeff5d15a3baf5"
+  privateKey: "6e9d8194fd846a4ff8d779dd42975b1f044cc8c1bb30a6c33142635e64761350"
   contract:
-    # 合约地址 0x26d66588b50783b57684982bad1cb50296d1d717
-    insurePlatformAddress: "0x26d66588b50783b57684982bad1cb50296d1d717"
-    insureFishTraceabAddress: "0xc2e7acaade0bb38c8e3d679c067a58266c77a535"
+    # 合约地址 0xabb7abfdfe6bf01d75e858d8521950b4d0d09306
+    insurePlatformAddress: "0xabb7abfdfe6bf01d75e858d8521950b4d0d09306"
+    insureFishTraceabAddress: "0xf1fa838ecf0e4b91a200e1ed6b165dfcac1538e1"
 
 
 #mqtt配置

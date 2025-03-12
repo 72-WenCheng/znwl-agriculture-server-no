@@ -97,10 +97,9 @@ public class SensorAlert implements Serializable {
     private String alertDate;
 
     /**
-     * 区分大棚还是鱼棚  0是大棚 1是鱼棚
+     * 区分大棚还是养殖棚  0是大棚 1是鱼棚
      */
     private String pastureType;
-
 
     /**
      * 处理状态（0未处理，1已处理）
