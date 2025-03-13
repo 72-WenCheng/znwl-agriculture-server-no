@@ -32,7 +32,7 @@ public class ThresholdConfigUtil {
         // 湿度阈值（百分比）
         thresholdConfig.put("humidity", new double[]{30.0, 100.0});
         // 光照阈值（lux）
-        thresholdConfig.put("light", new double[]{80, 10000.0});
+        thresholdConfig.put("light", new double[]{40, 10000.0});
 //        // 风速阈值（m/s）
 //        thresholdConfig.put("speed", new double[]{-1.0, 10.0});
 //        // 土壤温度阈值（摄氏度）   5 - 30
