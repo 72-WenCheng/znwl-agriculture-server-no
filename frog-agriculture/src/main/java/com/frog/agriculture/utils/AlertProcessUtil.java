@@ -84,22 +84,22 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
 //                minBuffer = 0.0; // 设置最小缓冲值为0.0
 //                maxBuffer = 1.5; // 设置最大缓冲值为1.5
 //                break;
-            case "soil_temperature": // 如果参数为soil_temperature（土壤温度）
-                minBuffer = 2.0; // 设置最小缓冲值为2.0
-                maxBuffer = 2.0; // 设置最大缓冲值为2.0
-                break;
-            case "soil_ph": // 如果参数为soil_ph（土壤pH）
-                minBuffer = 0.3; // 设置最小缓冲值为0.3
-                maxBuffer = 0.3; // 设置最大缓冲值为0.3
-                break;
-            case "conductivity": // 如果参数为conductivity（土壤电导率）
-                minBuffer = 10.0; // 设置最小缓冲值为10.0
-                maxBuffer = 200.0; // 设置最大缓冲值为200.0
-                break;
-            case "moisture": // 如果参数为moisture（土壤水分）
-                minBuffer = 5.0; // 设置最小缓冲值为5.0
-                maxBuffer = 5.0; // 设置最大缓冲值为5.0
-                break;
+//            case "soil_temperature": // 如果参数为soil_temperature（土壤温度）
+//                minBuffer = 2.0; // 设置最小缓冲值为2.0
+//                maxBuffer = 2.0; // 设置最大缓冲值为2.0
+//                break;
+//            case "soil_ph": // 如果参数为soil_ph（土壤pH）
+//                minBuffer = 0.3; // 设置最小缓冲值为0.3
+//                maxBuffer = 0.3; // 设置最大缓冲值为0.3
+//                break;
+//            case "conductivity": // 如果参数为conductivity（土壤电导率）
+//                minBuffer = 10.0; // 设置最小缓冲值为10.0
+//                maxBuffer = 200.0; // 设置最大缓冲值为200.0
+//                break;
+//            case "moisture": // 如果参数为moisture（土壤水分）
+//                minBuffer = 5.0; // 设置最小缓冲值为5.0
+//                maxBuffer = 5.0; // 设置最大缓冲值为5.0
+//                break;
             case "water_temperature": // 如果参数为water_temperature（水温）
                 minBuffer = 2.0; // 设置最小缓冲值为2.0
                 maxBuffer = 2.0; // 设置最大缓冲值为2.0
@@ -877,6 +877,49 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
             this.device = device;
         }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

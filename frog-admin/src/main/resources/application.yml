@@ -6,14 +6,14 @@ bot:
   aiDoc: chat
   stream: false
   aiTimeoutMsec: 60000
-  asrUrl: ws://192.168.1.128:10095
+  asrUrl: ws://localhost:10095
   ttsUrl: http://192.168.1.194:50000/inference_
   ttsMode: sft
   spkId: 中文女
   promptText: 希望你以后能够做的比我还好呦。
   promptWav: static/cross_lingual_prompt.wav
   instructText: Theo \'Crimson\', is a fiery, passionate rebel leader. \ Fights with fervor for justice, but struggles with impulsiveness.
-  aiVLUrl: http://192.168.1.136:10095/
+  aiVLUrl: http://192.168.31.209:10095/
 # 项目相关配置
 ruoyi:
   # 名称
@@ -26,7 +26,7 @@ ruoyi:
   demoEnabled: true
   # 文件路径，以uploadPath结尾 示例（ Windows配置 D:/uploadPath，Linux配置 /uploadPath, Mac /Users/xxx）
   # D:\qkl-zhny\znwl-agriculture-server-no\uploadPath
-  profile: E:\idea\project\Java\znwl-agriculture-server-no\uploadPath
+  profile: D:\qkl-zhny\znwl-agriculture-server-no\uploadPath
   #  profile: F:/ny/frog-smart-agriculture-master/frog-agriculture-server/uploadPath
 
   #  profile: C:/Users/tanmin/Desktop/区块链技术应用/若依农业/frog-smart-agriculture-master/frog-agriculture-server/uploadPath

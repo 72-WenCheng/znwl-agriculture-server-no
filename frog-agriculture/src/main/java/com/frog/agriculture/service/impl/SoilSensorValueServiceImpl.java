@@ -2,6 +2,7 @@ package com.frog.agriculture.service.impl;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ThreadLocalRandom;
 import javax.annotation.PostConstruct;
 
 import com.frog.IaAgriculture.domain.Device;
@@ -237,12 +238,8 @@ public class SoilSensorValueServiceImpl implements ISoilSensorValueService {
                 globalSensorData.put("soil_ph", parsedData);
                 sensorValue.setSoilPh(parsedData.get("soil_ph").toString());
                 break;
-
-
-
-            /* 暂时注释掉水质传感器处理
             case "8": // 水质传感器
-                parsedData = parseWaterQualityData(response);
+                parsedData = SensorDataParser.parseWaterQualityData(response);
                 globalSensorData.put("water_quality", parsedData);
                 fishWaterQuality.setWaterTemperature(parsedData.get("temperature").toString());
                 fishWaterQuality.setWaterPhValue(parsedData.get("ph_value").toString());
@@ -263,10 +260,10 @@ public class SoilSensorValueServiceImpl implements ISoilSensorValueService {
                 nitrite = Math.floor(nitrite * 100) / 100.0;
                 fishWaterQuality.setWaterNitriteContent(String.format("%.2f", nitrite));
 
-                fishWaterQuality.setTime(currentTime());
-                fishWaterQuality.setDate(currentDate());
+                fishWaterQuality.setTime(AlertProcessUtil.currentTime());
+                fishWaterQuality.setDate(AlertProcessUtil.currentDate());
                 break;
-            */
+
             default:
                 log.warn("未知传感器ID: " + sensorType);
                 break;
@@ -282,7 +279,7 @@ public class SoilSensorValueServiceImpl implements ISoilSensorValueService {
         Map<String, Device> sensorBindings = new HashMap<>();
         // 遍历所有传感器ID，根据ID查询设备绑定信息
         for (String sensorType : sensorCommands.keySet()) {
-            Device device = deviceMapper.selectSensorById(sensorType);
+            Device device = deviceMapper.selectInfoById(sensorType);
             if (device != null) {
                 sensorBindings.put(sensorType, device);
             }
@@ -406,15 +403,22 @@ public class SoilSensorValueServiceImpl implements ISoilSensorValueService {
 //                    case "3": // 风速传感器
 //                        individualValue.setSpeed(sensorValue.getSpeed());
 //                        break;
+
                     case "1": // 土壤温度传感器
                         individualValue.setSoilTemperature(sensorValue.getSoilTemperature());
                         break;
-                    case "4": // 土壤pH传感器
-                        individualValue.setSoilPh(sensorValue.getSoilPh());
+                    case "2": // 百叶箱传感器
+                        individualValue.setTemperature(sensorValue.getTemperature());
+                        individualValue.setHumidity(sensorValue.getHumidity());
+                        individualValue.setLightLux(sensorValue.getLightLux());
+
                         break;
                     case "3": // 土壤水分电导率传感器
                         individualValue.setSoilConductivity(sensorValue.getSoilConductivity());
                         individualValue.setSoilMoisture(sensorValue.getSoilMoisture());
+                        break;
+                    case "4": // 土壤pH传感器
+                        individualValue.setSoilPh(sensorValue.getSoilPh());
                         break;
                 }
                 // 单独入库当前传感器数据

@@ -30,19 +30,19 @@ public class ThresholdConfigUtil {
         // 温度阈值（摄氏度）
         thresholdConfig.put("temperature", new double[]{10.0, 35.0});
         // 湿度阈值（百分比）
-        thresholdConfig.put("humidity", new double[]{30.0, 80.0});
+        thresholdConfig.put("humidity", new double[]{30.0, 100.0});
         // 光照阈值（lux）
         thresholdConfig.put("light", new double[]{80, 10000.0});
-        // 风速阈值（m/s）
-        thresholdConfig.put("speed", new double[]{-1.0, 10.0});
-        // 土壤温度阈值（摄氏度）   5 - 30
-        thresholdConfig.put("soil_temperature", new double[]{2.0, 30.0});
-        // 土壤pH阈值
-        thresholdConfig.put("soil_ph", new double[]{5.0, 7.5});
-        // 土壤电导率阈值（μS/cm）
-        thresholdConfig.put("conductivity", new double[]{100.0, 2000.0});
-        // 土壤水分阈值（百分比）
-        thresholdConfig.put("moisture", new double[]{20.0, 65.0});
+//        // 风速阈值（m/s）
+//        thresholdConfig.put("speed", new double[]{-1.0, 10.0});
+//        // 土壤温度阈值（摄氏度）   5 - 30
+//        thresholdConfig.put("soil_temperature", new double[]{2.0, 30.0});
+//        // 土壤pH阈值
+//        thresholdConfig.put("soil_ph", new double[]{5.0, 7.5});
+//        // 土壤电导率阈值（μS/cm）
+//        thresholdConfig.put("conductivity", new double[]{100.0, 2000.0});
+//        // 土壤水分阈值（百分比）
+//        thresholdConfig.put("moisture", new double[]{20.0, 65.0});
         // 水温阈值（摄氏度）
         thresholdConfig.put("water_temperature", new double[]{15.0, 30.0});
         // 水pH阈值
@@ -50,7 +50,7 @@ public class ThresholdConfigUtil {
         // 溶解氧阈值（mg/L）
         thresholdConfig.put("oxygen", new double[]{5.0, 8.0});
         // 氨氮阈值（mg/L）
-        thresholdConfig.put("ammonia", new double[]{0.0, 0.02});
+        thresholdConfig.put("ammonia", new double[]{0.0, 0.03});
         // 亚硝酸盐阈值（mg/L）
         thresholdConfig.put("nitrite", new double[]{0.0, 0.1});
 
