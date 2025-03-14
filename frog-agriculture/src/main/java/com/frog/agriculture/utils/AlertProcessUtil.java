@@ -370,6 +370,7 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
         alert.setRemark("数据恢复正常，系统自动处理");
         alert.setUpdateTime(currentTimestamp());
         getSensorAlertMapper().updateSensorAlert(alert);
+
         log.info(logPrefix + ": " + alert.getParamName() + " 数据恢复正常");
     }
 
