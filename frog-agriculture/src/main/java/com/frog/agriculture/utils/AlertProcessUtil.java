@@ -761,12 +761,11 @@ public class AlertProcessUtil { // 定义AlertProcessUtil类
             throw new ServerException(ErrorCodeEnum.CONTENT_SERVER_ERROR);
         }
 
-
-        // 触发红灯警报  物联网
+        // 触发红灯警报
         serialPortUtil.openRedLight();
         AudioPlayer.playAlarmSound();
 
-        //保存警告信息  物联网
+        //保存警告信息
         saveAlert(alert, "报警");
 
     }

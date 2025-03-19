@@ -25,11 +25,9 @@ ruoyi:
   # 实例演示开关
   demoEnabled: true
   # 文件路径，以uploadPath结尾 示例（ Windows配置 D:/uploadPath，Linux配置 /uploadPath, Mac /Users/xxx）
-  # D:\qkl-zhny\znwl-agriculture-server-no\uploadPath
-  profile: D:\qkl-zhny\znwl-agriculture-server-no\uploadPath
-  #  profile: F:/ny/frog-smart-agriculture-master/frog-agriculture-server/uploadPath
+  # D:\blockchain-zlxn\zlxn-aquaponics-backend\uploadPath
+  profile: D:\blockchain-zlxn\zlxn-aquaponics-backend\uploadPath
 
-  #  profile: C:/Users/tanmin/Desktop/区块链技术应用/若依农业/frog-smart-agriculture-master/frog-agriculture-server/uploadPath
   # 获取ip地址开关
   addressEnabled: true
   # 验证码类型 math 数组计算 char 字符验证
@@ -191,7 +189,7 @@ spring:
   web:
     resources:
       #音频文件路径  D:\qkl-zhny\znwl-agriculture-server-no\wav
-      static-locations: file:///D:/qkl-zhny/znwl-agriculture-server-no/wav/
+      static-locations: file:///D:/blockchain-zlxn/zlxn-aquaponics-backend/wav/
 
 # token配置
 token:

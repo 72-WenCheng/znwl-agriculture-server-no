@@ -10,7 +10,7 @@ import java.io.IOException;
 @Slf4j
 public class AudioPlayer {
 
-    private static final String ALARM_AUDIO_PATH = "D:\\qkl-zhny\\znwl-agriculture-server-no\\wav\\报警音响.wav";
+    private static final String ALARM_AUDIO_PATH = "D:\\blockchain-zlxn\\zlxn-aquaponics-backend\\wav\\报警音响.wav";
     private static Clip clip;
     private static boolean isPlaying = false;
 
