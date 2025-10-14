@@ -40,6 +40,15 @@ public class TraceSellpro extends BaseEntity
     @Excel(name = "产品图片")
     private String sellproImg;
 
+    /** 价格 */
+    private Double price;
+
+    /** 品类 */
+    private String category;
+
+    /** 库存 */
+    private Integer stock;
+
     /** 溯源页面模版ID */
     private Long templateId;
 

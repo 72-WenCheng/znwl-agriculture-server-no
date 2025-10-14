@@ -11,12 +11,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="sellproWeight"    column="sellpro_weight"    />
         <result property="sellproGuige"    column="sellpro_guige"    />
         <result property="sellproImg"    column="sellpro_img"    />
-        <result property="sellproImg"    column="sellpro_img"    />
         <result property="templateId"    column="template_id"    />
         <result property="codeTemplateId"    column="code_template_id"    />
         <result property="remark"    column="remark"    />
         <result property="status"    column="status"    />
         <result property="orderNum"    column="order_num"    />
+        <result property="price"    column="price"    />
+        <result property="category"    column="category"    />
+        <result property="stock"    column="stock"    />
         <result property="createBy"    column="create_by"    />
         <result property="createTime"    column="create_time"    />
         <result property="updateBy"    column="update_by"    />
@@ -25,7 +27,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </resultMap>
 
     <sql id="selectTraceSellproVo">
-        select sellpro_id, sellpro_name, sellpro_area, sellpro_weight, sellpro_guige, sellpro_img,template_id,code_template_id,remark, status, order_num, create_by, create_time, update_by, update_time, del_flag from agriculture_trace_sellpro
+        select sellpro_id, sellpro_name, sellpro_area, sellpro_weight, sellpro_guige, sellpro_img, price, category, stock, template_id, code_template_id, remark, status, order_num, create_by, create_time, update_by, update_time, del_flag from agriculture_trace_sellpro
     </sql>
 
     <select id="selectTraceSellproList" parameterType="TraceSellpro" resultMap="TraceSellproResult">
@@ -38,7 +40,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="sellproImg != null  and sellproImg != ''"> and sellpro_img = #{sellproImg}</if>
             <if test="status != null  and status != ''"> and status = #{status}</if>
             <if test="orderNum != null "> and order_num = #{orderNum}</if>
-and del_flag = 0
+            and del_flag = 0
         </where>
     </select>
     
@@ -55,6 +57,9 @@ and del_flag = 0
             <if test="sellproWeight != null and sellproWeight != ''">sellpro_weight,</if>
             <if test="sellproGuige != null and sellproGuige != ''">sellpro_guige,</if>
             <if test="sellproImg != null and sellproImg != ''">sellpro_img,</if>
+            <if test="price != null">price,</if>
+            <if test="category != null and category != ''">category,</if>
+            <if test="stock != null">stock,</if>
             <if test="templateId != null and templateId != ''">template_id,</if>
             <if test="codeTemplateId != null and codeTemplateId != ''">code_template_id,</if>
             <if test="remark != null and remark != ''">remark,</if>
@@ -72,6 +77,9 @@ and del_flag = 0
             <if test="sellproWeight != null and sellproWeight != ''">#{sellproWeight},</if>
             <if test="sellproGuige != null and sellproGuige != ''">#{sellproGuige},</if>
             <if test="sellproImg != null and sellproImg != ''">#{sellproImg},</if>
+            <if test="price != null">#{price},</if>
+            <if test="category != null and category != ''">#{category},</if>
+            <if test="stock != null">#{stock},</if>
             <if test="templateId != null and templateId != ''">#{templateId},</if>
             <if test="codeTemplateId != null and codeTemplateId != ''">#{codeTemplateId},</if>
             <if test="remark != null and remark != ''">#{remark},</if>
@@ -82,7 +90,7 @@ and del_flag = 0
             <if test="updateBy != null">#{updateBy},</if>
             <if test="updateTime != null">#{updateTime},</if>
             <if test="delFlag != null and delFlag != ''">#{delFlag},</if>
-         </trim>
+        </trim>
     </insert>
 
     <update id="updateTraceSellpro" parameterType="TraceSellpro">

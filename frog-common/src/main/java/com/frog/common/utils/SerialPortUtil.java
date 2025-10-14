@@ -15,7 +15,7 @@ public class SerialPortUtil {
 
     public SerialPortUtil() {
         // 配置串口
-        serialPort = SerialPort.getCommPort("COM4");
+        serialPort = SerialPort.getCommPort("COM3");
         serialPort.setBaudRate(9600);
         serialPort.setNumDataBits(8);
         serialPort.setParity(SerialPort.NO_PARITY);

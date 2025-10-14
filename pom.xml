@@ -72,6 +72,14 @@
                 <version>${bitwalker.version}</version>
             </dependency>
 
+            <!-- 监控服务器-->
+            <dependency>
+                <groupId>com.github.oshi</groupId>
+                <artifactId>oshi-core</artifactId>
+                <version>5.8.2</version>
+            </dependency>
+
+
             <!-- SpringBoot集成mybatis框架 -->
             <dependency>
                 <groupId>org.mybatis.spring.boot</groupId>

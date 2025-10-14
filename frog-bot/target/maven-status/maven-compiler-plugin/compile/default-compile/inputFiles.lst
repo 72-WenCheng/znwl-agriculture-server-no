@@ -1,0 +1,17 @@
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\controller\AIController.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\model\domain\AiOptimalAnalysis.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\controller\AudioController.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\service\AiOptimalAnalysisService.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\controller\ChatMessageController.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\config\WebSocketConfiguration.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\service\ChatMessageService.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\utils\HttpClientUtil.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\mapper\AiOptimalAnalysisMapper.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\service\impl\ChatMessageServiceImpl.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\websocket\WebSocketClient.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\config\BotConfig.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\controller\CosyController.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\model\ChatMessage.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\utils\AIModelApiUtils.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\websocket\WebSocketServer.java
+D:\zhnlrjcs\znwl-agriculture-server-no\frog-bot\src\main\java\com\frog\mapper\ChatMessageMapper.java

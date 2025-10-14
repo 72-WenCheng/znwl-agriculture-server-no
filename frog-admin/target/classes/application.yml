@@ -1,3 +1,10 @@
+# 监控服务器
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
 # bot配置  qwen2.5:14b
 bot:
   name: bot
@@ -10,7 +17,7 @@ bot:
   ttsUrl: http://192.168.1.194:50000/inference_
   ttsMode: sft
   spkId: 中文女
-  promptText: 希望你以后能够做的比我还好呦。
+  promptText: 希望你以后能够做的比我还好呦
   promptWav: static/cross_lingual_prompt.wav
   instructText: Theo \'Crimson\', is a fiery, passionate rebel leader. \ Fights with fervor for justice, but struggles with impulsiveness.
   aiVLUrl: http://192.168.31.209:10095/
@@ -65,10 +72,10 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     username: root
-    password: 123456
+    password: root
     #    driverClassName: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.31.201:3306/znwl_agriculture?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/znwl_agriculture?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+    river-class-name: com.mysql.cj.jdbc.Driver
     initial-size: 5                                       # 初始化大小
     min-idle: 10                                          # 最小连接数
     max-active: 50                                        # 最大连接数
@@ -81,9 +88,9 @@ spring:
       # 主库数据源
       master:
         #        url: jdbc:mysql://localhost:3306/frog_agriculture?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
-        url: jdbc:mysql://192.168.31.201:3306/znwl_agriculture?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
+        url: jdbc:mysql://127.0.0.1:3306/znwl_agriculture?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf8
       username: root
-      password: 123456
+      password: root
       # 从库数据源
       slave:
         # 从数据源开关/默认关闭
@@ -292,16 +299,16 @@ mybatis-plus:
 # 区块链配置
 system:
   # 虚拟机IP:端口
-  peers:  192.168.31.101:20200
+  peers:  192.168.1.5:20200
   groupId: 1
   node: 1
   certPath: conf
   # 私钥
-  privateKey: "6e9d8194fd846a4ff8d779dd42975b1f044cc8c1bb30a6c33142635e64761350"
+  privateKey: "121e747787e746e8655f404a43a052e66068247d3e67652a18e8a665b7bf0a2f"
   contract:
     # 合约地址 0xabb7abfdfe6bf01d75e858d8521950b4d0d09306
-    insurePlatformAddress: "0xabb7abfdfe6bf01d75e858d8521950b4d0d09306"
-    insureFishTraceabAddress: "0xf1fa838ecf0e4b91a200e1ed6b165dfcac1538e1"
+    insurePlatformAddress: "0x4e47ad177b049a58db10415fab5aacc5a9203e89"
+    insureFishTraceabAddress: "0x3dce39407dd17862fa973d5b129d4d7a4c9a22e5"
 
 
 #mqtt配置
@@ -313,4 +320,4 @@ mqtt:
   subTopic: "pop"
 # 条形码前端地址
 barcode:
-  path: http://192.168.31.201/originIndex?code=
+  path: http://127.0.0.1/originIndex?code=

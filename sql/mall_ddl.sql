@@ -1,0 +1,44 @@
+-- 商品字段扩展（可选执行）
+ALTER TABLE agriculture_trace_sellpro 
+	ADD COLUMN price DECIMAL(10,2) NULL COMMENT '价格' AFTER sellpro_img,
+	ADD COLUMN category VARCHAR(64) NULL COMMENT '品类' AFTER price,
+	ADD COLUMN stock INT NULL COMMENT '库存' AFTER category;
+
+-- 订单表
+CREATE TABLE IF NOT EXISTS mall_order (
+	id VARCHAR(64) PRIMARY KEY,
+	amount DECIMAL(12,2) NOT NULL DEFAULT 0,
+	status VARCHAR(16) NOT NULL DEFAULT 'CREATED',
+	create_time DATETIME NOT NULL,
+	update_time DATETIME NULL,
+	buyer_name VARCHAR(64) NULL,
+	buyer_phone VARCHAR(32) NULL,
+	remark VARCHAR(255) NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商城订单';
+
+-- 订单明细表
+CREATE TABLE IF NOT EXISTS mall_order_item (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	order_id VARCHAR(64) NOT NULL,
+	sellpro_id BIGINT NULL,
+	sellpro_name VARCHAR(128) NULL,
+	sellpro_guige VARCHAR(128) NULL,
+	sellpro_area VARCHAR(128) NULL,
+	sellpro_img VARCHAR(255) NULL,
+	price DECIMAL(10,2) NULL,
+	quantity INT NOT NULL DEFAULT 1,
+	FOREIGN KEY (order_id) REFERENCES mall_order(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='商城订单明细'; 
+
+-- 参观预约表
+CREATE TABLE IF NOT EXISTS booking (
+	id BIGINT PRIMARY KEY AUTO_INCREMENT,
+	date DATE NOT NULL,
+	start_time TIME NOT NULL,
+	end_time TIME NOT NULL,
+	people INT NOT NULL,
+	contact VARCHAR(64) NOT NULL,
+	phone VARCHAR(32) NOT NULL,
+	remark VARCHAR(255) NULL,
+	create_time DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='参观预约'; 

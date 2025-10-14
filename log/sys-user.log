@@ -1,10 +1,4 @@
-15:01:58.060 [schedule-pool-4] INFO  sys-user - [run,55] - [192.168.31.205]内网IP[admin][Success][登录成功]
-15:03:46.109 [schedule-pool-9] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
-15:08:20.606 [schedule-pool-6] INFO  sys-user - [run,55] - [192.168.31.207]内网IP[admin][Success][登录成功]
-15:41:33.858 [schedule-pool-24] INFO  sys-user - [run,55] - [192.168.31.131]内网IP[admin][Success][登录成功]
-15:41:46.470 [schedule-pool-37] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
-16:16:14.422 [schedule-pool-1] INFO  sys-user - [run,55] - [192.168.31.205]内网IP[admin][Success][登录成功]
-16:18:49.548 [schedule-pool-27] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
-16:33:56.047 [schedule-pool-4] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
-16:37:52.110 [schedule-pool-29] INFO  sys-user - [run,55] - [192.168.31.201]内网IP[admin][Success][登录成功]
-16:38:00.836 [schedule-pool-44] INFO  sys-user - [run,55] - [192.168.31.131]内网IP[admin][Success][登录成功]
+19:26:13.313 [schedule-pool-1] INFO  sys-user - [run,55] - [127.0.0.1]内网IP[admin][Success][登录成功]
+20:08:35.363 [Thread-47] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+20:08:59.742 [Thread-64] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+21:05:16.827 [Thread-76] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====

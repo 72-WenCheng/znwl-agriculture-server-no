@@ -101,6 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 // 对于登录login 注册register 验证码captchaImage 允许匿名访问
                 .antMatchers("/login", "/register", "/captchaImage","/iot/tool/register","/iot/tool/ntp","/iot/tool/download",
                         "/iot/tool/mqtt/auth","/iot/tool/mqtt/webhook","/auth/**/**","/api/license/**").anonymous()
+                .antMatchers("/api/performance").permitAll()
                 /** 溯源页面 **/
                 .antMatchers(
                         "/agriculture/traceWebSite/**"
@@ -120,6 +121,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
                 .antMatchers("/wav/**").permitAll()
                 .antMatchers("/ai/**").permitAll()
                 .antMatchers("/agriculture/**").permitAll()
+                .antMatchers("/mall/**").permitAll()
+                .antMatchers("/booking/**").permitAll()
                 .antMatchers("/soilsensorvaluevo/**").permitAll()
                 .antMatchers("/fishPasture/fishbatchTask/**").permitAll()
                 .antMatchers("/fishPasture/species/**").permitAll()

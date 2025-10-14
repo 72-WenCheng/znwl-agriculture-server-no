@@ -204,15 +204,10 @@ public class SoilSensorValueServiceImpl implements ISoilSensorValueService {
                                            SoilSensorValue sensorValue, FishWaterQuality fishWaterQuality) {
         Map<String, Object> parsedData = new HashMap<>();
         switch (sensorType) {
-//            case "1": // 风向传感器
-//                parsedData = SensorDataParser.parseWindDirectionData(response);
-//                globalSensorData.put("wind_direction", parsedData);
-//                sensorValue.setDirection(parsedData.get("direction").toString());
-//                break;
-            case "1": // 土壤温度和水分传感器
-                parsedData = SensorDataParser.parseSoilTemperatureMoistureData(response);
-                globalSensorData.put("soil_temperature_moisture", parsedData);
-                sensorValue.setSoilTemperature(parsedData.get("soil_temperature").toString());
+            case "1": // 风向传感器
+                parsedData = SensorDataParser.parseWindDirectionData(response);
+                globalSensorData.put("wind_direction", parsedData);
+                sensorValue.setDirection(parsedData.get("direction").toString());
                 break;
             case "2": // 百叶箱传感器
                 parsedData = SensorDataParser.parseBaiyeBoxData(response);
@@ -221,48 +216,52 @@ public class SoilSensorValueServiceImpl implements ISoilSensorValueService {
                 sensorValue.setHumidity(parsedData.get("humidity").toString());
                 sensorValue.setLightLux(parsedData.get("light").toString());
                 break;
-
-//            case "3": // 风速传感器
-//                parsedData = SensorDataParser.parseWindSpeedData(response);
-//                globalSensorData.put("wind_speed", parsedData);
-//                sensorValue.setSpeed(parsedData.get("speed").toString());
-//                break;
-            case "3": // 土壤水分电导率传感器
+            case "3": // 风速传感器
+                parsedData = SensorDataParser.parseWindSpeedData(response);
+                globalSensorData.put("wind_speed", parsedData);
+                sensorValue.setSpeed(parsedData.get("speed").toString());
+                break;
+            case "4": // 土壤温度和水分传感器
+                parsedData = SensorDataParser.parseSoilTemperatureMoistureData(response);
+                globalSensorData.put("soil_temperature_moisture", parsedData);
+                sensorValue.setSoilTemperature(parsedData.get("soil_temperature").toString());
+                break;
+            case "5": // 土壤pH传感器
+                parsedData = SensorDataParser.parseSoilPHData(response);
+                globalSensorData.put("soil_ph", parsedData);
+                sensorValue.setSoilPh(parsedData.get("soil_ph").toString());
+                break;
+            case "6": // 土壤水分电导率传感器
                 parsedData = SensorDataParser.parseSoilMoistureConductivityData(response);
                 globalSensorData.put("soil_moisture_conductivity", parsedData);
                 sensorValue.setSoilConductivity(parsedData.get("conductivity").toString());
                 sensorValue.setSoilMoisture(parsedData.get("moisture").toString());
                 break;
-            case "4": // 土壤pH传感器
-                parsedData = SensorDataParser.parseSoilPHData(response);
-                globalSensorData.put("soil_ph", parsedData);
-                sensorValue.setSoilPh(parsedData.get("soil_ph").toString());
-                break;
-            case "8": // 水质传感器
-                parsedData = SensorDataParser.parseWaterQualityData(response);
-                globalSensorData.put("water_quality", parsedData);
-                fishWaterQuality.setWaterTemperature(parsedData.get("temperature").toString());
-                fishWaterQuality.setWaterPhValue(parsedData.get("ph_value").toString());
-                fishWaterQuality.setDeviceId(null);
-                
-                // 生成溶解氧值
-                double oxygen = ThreadLocalRandom.current().nextDouble(6.2, 6.5);
-                oxygen = Math.round(oxygen * 100.0) / 100.0;
-                fishWaterQuality.setWaterOxygenContent(String.format("%.2f", oxygen));
-
-                // 生成氨氮含量
-                double ammonia = ThreadLocalRandom.current().nextDouble(0.01, 0.015);
-                ammonia = Math.round(ammonia * 1000.0) / 1000.0;
-                fishWaterQuality.setWaterAmmoniaNitrogenContent(String.format("%.3f", ammonia));
-
-                // 生成亚硝酸盐含量
-                double nitrite = ThreadLocalRandom.current().nextDouble(0.03, 0.05);
-                nitrite = Math.floor(nitrite * 100) / 100.0;
-                fishWaterQuality.setWaterNitriteContent(String.format("%.2f", nitrite));
-
-                fishWaterQuality.setTime(AlertProcessUtil.currentTime());
-                fishWaterQuality.setDate(AlertProcessUtil.currentDate());
-                break;
+//            case "8": // 水质传感器
+//                parsedData = SensorDataParser.parseWaterQualityData(response);
+//                globalSensorData.put("water_quality", parsedData);
+//                fishWaterQuality.setWaterTemperature(parsedData.get("temperature").toString());
+//                fishWaterQuality.setWaterPhValue(parsedData.get("ph_value").toString());
+//                fishWaterQuality.setDeviceId(null);
+//
+//                // 生成溶解氧值
+//                double oxygen = ThreadLocalRandom.current().nextDouble(6.2, 6.5);
+//                oxygen = Math.round(oxygen * 100.0) / 100.0;
+//                fishWaterQuality.setWaterOxygenContent(String.format("%.2f", oxygen));
+//
+//                // 生成氨氮含量
+//                double ammonia = ThreadLocalRandom.current().nextDouble(0.01, 0.015);
+//                ammonia = Math.round(ammonia * 1000.0) / 1000.0;
+//                fishWaterQuality.setWaterAmmoniaNitrogenContent(String.format("%.3f", ammonia));
+//
+//                // 生成亚硝酸盐含量
+//                double nitrite = ThreadLocalRandom.current().nextDouble(0.03, 0.05);
+//                nitrite = Math.floor(nitrite * 100) / 100.0;
+//                fishWaterQuality.setWaterNitriteContent(String.format("%.2f", nitrite));
+//
+//                fishWaterQuality.setTime(AlertProcessUtil.currentTime());
+//                fishWaterQuality.setDate(AlertProcessUtil.currentDate());
+//                break;
 
             default:
                 log.warn("未知传感器ID: " + sensorType);
@@ -403,7 +402,6 @@ public class SoilSensorValueServiceImpl implements ISoilSensorValueService {
 //                    case "3": // 风速传感器
 //                        individualValue.setSpeed(sensorValue.getSpeed());
 //                        break;
-
                     case "1": // 土壤温度传感器
                         individualValue.setSoilTemperature(sensorValue.getSoilTemperature());
                         break;
@@ -411,7 +409,6 @@ public class SoilSensorValueServiceImpl implements ISoilSensorValueService {
                         individualValue.setTemperature(sensorValue.getTemperature());
                         individualValue.setHumidity(sensorValue.getHumidity());
                         individualValue.setLightLux(sensorValue.getLightLux());
-
                         break;
                     case "3": // 土壤水分电导率传感器
                         individualValue.setSoilConductivity(sensorValue.getSoilConductivity());
