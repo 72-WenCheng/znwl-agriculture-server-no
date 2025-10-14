@@ -314,3 +314,10 @@
 21:05:42.855 [restartedMain] INFO  o.a.c.h.Http11NioProtocol - [log,173] - Starting ProtocolHandler ["http-nio-8081"]
 21:05:43.298 [restartedMain] INFO  c.f.FrogApplication - [logStarted,61] - Started FrogApplication in 12.582 seconds (JVM running for 6065.607)
 21:05:44.311 [Quartz Scheduler [RuoyiScheduler]] INFO  o.q.c.QuartzScheduler - [start,547] - Scheduler RuoyiScheduler_$_WenCheng-Pro161760447139295 started.
+21:08:31.463 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler RuoyiScheduler_$_WenCheng-Pro161760447139295 paused.
+21:08:31.950 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,666] - Scheduler RuoyiScheduler_$_WenCheng-Pro161760447139295 shutting down.
+21:08:31.950 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [standby,585] - Scheduler RuoyiScheduler_$_WenCheng-Pro161760447139295 paused.
+21:08:31.952 [SpringApplicationShutdownHook] INFO  o.q.c.QuartzScheduler - [shutdown,740] - Scheduler RuoyiScheduler_$_WenCheng-Pro161760447139295 shutdown complete.
+21:08:31.952 [SpringApplicationShutdownHook] INFO  sys-user - [shutdownAsyncManager,31] - ====关闭后台任务任务线程池====
+21:08:31.958 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2071] - {dataSource-4} closing ...
+21:08:31.962 [SpringApplicationShutdownHook] INFO  c.a.d.p.DruidDataSource - [close,2144] - {dataSource-4} closed

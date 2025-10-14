@@ -11154,3 +11154,66 @@ Caused by: java.lang.ClassNotFoundException: Cannot find class: TraceSellpro
 21:07:53.997 [schedule-pool-14] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器8数据采集异常：null
 21:07:53.997 [schedule-pool-14] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2452数据采集异常：String index out of range: 3
 21:07:53.998 [schedule-pool-14] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,158] - 数据采集过程中发生异常，本次数据不做数据库插入。
+21:07:58.396 [schedule-pool-21] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器1数据采集异常：null
+21:07:58.497 [schedule-pool-21] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2数据采集异常：null
+21:07:58.597 [schedule-pool-21] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器3数据采集异常：null
+21:07:58.697 [schedule-pool-21] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器4数据采集异常：null
+21:07:58.798 [schedule-pool-21] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器5数据采集异常：null
+21:07:58.898 [schedule-pool-21] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器6数据采集异常：null
+21:07:58.999 [schedule-pool-21] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器8数据采集异常：null
+21:07:58.999 [schedule-pool-21] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2452数据采集异常：String index out of range: 3
+21:07:58.999 [schedule-pool-21] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,158] - 数据采集过程中发生异常，本次数据不做数据库插入。
+21:08:03.396 [schedule-pool-10] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器1数据采集异常：null
+21:08:03.496 [schedule-pool-10] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2数据采集异常：null
+21:08:03.596 [schedule-pool-10] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器3数据采集异常：null
+21:08:03.697 [schedule-pool-10] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器4数据采集异常：null
+21:08:03.797 [schedule-pool-10] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器5数据采集异常：null
+21:08:03.898 [schedule-pool-10] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器6数据采集异常：null
+21:08:03.998 [schedule-pool-10] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器8数据采集异常：null
+21:08:03.998 [schedule-pool-10] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2452数据采集异常：String index out of range: 3
+21:08:03.998 [schedule-pool-10] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,158] - 数据采集过程中发生异常，本次数据不做数据库插入。
+21:08:08.395 [schedule-pool-7] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器1数据采集异常：null
+21:08:08.496 [schedule-pool-7] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2数据采集异常：null
+21:08:08.596 [schedule-pool-7] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器3数据采集异常：null
+21:08:08.696 [schedule-pool-7] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器4数据采集异常：null
+21:08:08.797 [schedule-pool-7] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器5数据采集异常：null
+21:08:08.897 [schedule-pool-7] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器6数据采集异常：null
+21:08:08.997 [schedule-pool-7] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器8数据采集异常：null
+21:08:08.997 [schedule-pool-7] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2452数据采集异常：String index out of range: 3
+21:08:08.997 [schedule-pool-7] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,158] - 数据采集过程中发生异常，本次数据不做数据库插入。
+21:08:13.395 [schedule-pool-23] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器1数据采集异常：null
+21:08:13.495 [schedule-pool-23] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2数据采集异常：null
+21:08:13.595 [schedule-pool-23] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器3数据采集异常：null
+21:08:13.695 [schedule-pool-23] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器4数据采集异常：null
+21:08:13.796 [schedule-pool-23] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器5数据采集异常：null
+21:08:13.897 [schedule-pool-23] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器6数据采集异常：null
+21:08:13.997 [schedule-pool-23] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器8数据采集异常：null
+21:08:13.997 [schedule-pool-23] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2452数据采集异常：String index out of range: 3
+21:08:13.997 [schedule-pool-23] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,158] - 数据采集过程中发生异常，本次数据不做数据库插入。
+21:08:18.395 [schedule-pool-4] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器1数据采集异常：null
+21:08:18.496 [schedule-pool-4] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2数据采集异常：null
+21:08:18.596 [schedule-pool-4] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器3数据采集异常：null
+21:08:18.696 [schedule-pool-4] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器4数据采集异常：null
+21:08:18.796 [schedule-pool-4] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器5数据采集异常：null
+21:08:18.897 [schedule-pool-4] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器6数据采集异常：null
+21:08:18.997 [schedule-pool-4] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器8数据采集异常：null
+21:08:18.997 [schedule-pool-4] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2452数据采集异常：String index out of range: 3
+21:08:18.998 [schedule-pool-4] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,158] - 数据采集过程中发生异常，本次数据不做数据库插入。
+21:08:23.395 [schedule-pool-11] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器1数据采集异常：null
+21:08:23.496 [schedule-pool-11] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2数据采集异常：null
+21:08:23.596 [schedule-pool-11] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器3数据采集异常：null
+21:08:23.697 [schedule-pool-11] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器4数据采集异常：null
+21:08:23.797 [schedule-pool-11] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器5数据采集异常：null
+21:08:23.897 [schedule-pool-11] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器6数据采集异常：null
+21:08:23.998 [schedule-pool-11] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器8数据采集异常：null
+21:08:23.998 [schedule-pool-11] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2452数据采集异常：String index out of range: 3
+21:08:23.998 [schedule-pool-11] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,158] - 数据采集过程中发生异常，本次数据不做数据库插入。
+21:08:28.395 [schedule-pool-25] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器1数据采集异常：null
+21:08:28.496 [schedule-pool-25] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2数据采集异常：null
+21:08:28.596 [schedule-pool-25] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器3数据采集异常：null
+21:08:28.696 [schedule-pool-25] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器4数据采集异常：null
+21:08:28.797 [schedule-pool-25] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器5数据采集异常：null
+21:08:28.897 [schedule-pool-25] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器6数据采集异常：null
+21:08:28.997 [schedule-pool-25] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器8数据采集异常：null
+21:08:28.997 [schedule-pool-25] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,143] - 传感器2452数据采集异常：String index out of range: 3
+21:08:28.997 [schedule-pool-25] ERROR c.f.a.s.i.SoilSensorValueServiceImpl - [fetchAllSensorData,158] - 数据采集过程中发生异常，本次数据不做数据库插入。
