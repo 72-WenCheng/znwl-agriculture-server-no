@@ -28,6 +28,13 @@ public interface TraceSellproMapper
     public List<TraceSellpro> selectTraceSellproList(TraceSellpro traceSellpro);
 
     /**
+     * 根据溯源码查询溯源产品
+     * @param traceCode 溯源码
+     * @return 溯源产品
+     */
+    public TraceSellpro selectTraceSellproByTraceCode(String traceCode);
+
+    /**
      * 新增溯源产品
      * 
      * @param traceSellpro 溯源产品

@@ -55,6 +55,9 @@ public class TraceSellpro extends BaseEntity
     /** 溯源码模版ID */
     private Long codeTemplateId;
 
+    /** 溯源码（用于商城直接关联具体批次） */
+    private String traceCode;
+
     /** 状态 1可用 2不可用 trace_status */
     @Excel(name = "状态 1可用 2不可用 trace_status")
     private String status;

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.frog.agriculture.mapper.MallProductConfigMapper">
+
+    <resultMap id="MallProductConfigResult" type="com.frog.agriculture.domain.MallProductConfig">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="category" column="category"/>
+        <result property="partitionId" column="partition_id"/>
+        <result property="price" column="price"/>
+        <result property="cover" column="cover"/>
+        <result property="status" column="status"/>
+        <result property="remark" column="remark"/>
+        <result property="createBy" column="create_by"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateBy" column="update_by"/>
+        <result property="updateTime" column="update_time"/>
+        <result property="traceCode" column="trace_code"/>
+    </resultMap>
+
+    <sql id="selectConfigVo">
+        select id,name,category,partition_id,price,cover,status,remark,create_by,create_time,update_by,update_time,trace_code
+        from agriculture_mall_product_config
+    </sql>
+
+    <select id="selectMallProductConfigById" parameterType="Long" resultMap="MallProductConfigResult">
+        <include refid="selectConfigVo"/>
+        where id = #{id}
+    </select>
+
+    <select id="selectMallProductConfigList" parameterType="com.frog.agriculture.domain.MallProductConfig" resultMap="MallProductConfigResult">
+        <include refid="selectConfigVo"/>
+        <where>
+            <if test="name != null and name != ''"> and name like concat('%',#{name},'%')</if>
+            <if test="category != null and category != ''"> and category = #{category}</if>
+            <if test="partitionId != null and partitionId != ''"> and partition_id = #{partitionId}</if>
+            <if test="traceCode != null and traceCode != ''"> and trace_code = #{traceCode}</if>
+            <if test="status != null and status != ''"> and status = #{status}</if>
+        </where>
+    </select>
+
+    <insert id="insertMallProductConfig" parameterType="com.frog.agriculture.domain.MallProductConfig" useGeneratedKeys="true" keyProperty="id">
+        insert into agriculture_mall_product_config
+        (name, category, partition_id, price, cover, status, remark, trace_code, create_by, create_time, update_by, update_time)
+        values
+        (#{name}, #{category}, #{partitionId}, #{price}, #{cover}, #{status}, #{remark}, #{traceCode}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime})
+    </insert>
+
+    <update id="updateMallProductConfig" parameterType="com.frog.agriculture.domain.MallProductConfig">
+        update agriculture_mall_product_config
+        <set>
+            <if test="name != null">name=#{name},</if>
+            <if test="category != null">category=#{category},</if>
+            <if test="partitionId != null">partition_id=#{partitionId},</if>
+            <if test="price != null">price=#{price},</if>
+            <if test="cover != null">cover=#{cover},</if>
+            <if test="status != null">status=#{status},</if>
+            <if test="remark != null">remark=#{remark},</if>
+            <if test="traceCode != null">trace_code=#{traceCode},</if>
+            <if test="updateBy != null">update_by=#{updateBy},</if>
+            <if test="updateTime != null">update_time=#{updateTime},</if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <update id="deleteMallProductConfigById" parameterType="Long">
+        delete from agriculture_mall_product_config where id=#{id}
+    </update>
+
+    <update id="deleteMallProductConfigByIds" parameterType="String">
+        delete from agriculture_mall_product_config where id in
+        <foreach collection="array" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <select id="selectByTraceCodePrefix" parameterType="String" resultMap="MallProductConfigResult">
+        <include refid="selectConfigVo"/>
+        where trace_code is not null and trace_code != '' and #{traceCode} like concat(trace_code, '%')
+        and status = '1'
+        order by length(trace_code) desc
+        limit 1
+    </select>
+</mapper>
+

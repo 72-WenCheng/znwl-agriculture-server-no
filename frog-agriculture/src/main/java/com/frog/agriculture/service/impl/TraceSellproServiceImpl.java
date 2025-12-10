@@ -57,6 +57,11 @@ public class TraceSellproServiceImpl implements ITraceSellproService
         return traceSellproMapper.selectTraceSellproList(traceSellpro);
     }
 
+    @Override
+    public TraceSellpro selectByTraceCode(String traceCode) {
+        return traceSellproMapper.selectTraceSellproByTraceCode(traceCode);
+    }
+
     /**
      * 新增溯源产品
      * 

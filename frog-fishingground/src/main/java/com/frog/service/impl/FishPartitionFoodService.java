@@ -12,6 +12,10 @@ import com.frog.IaAgriculture.dto.ErrorCodeEnum;
 import com.frog.IaAgriculture.dto.IaPartitionFoodPageDTO;
 import com.frog.IaAgriculture.exception.ServerException;
 import com.frog.IaAgriculture.model.IaPartitionFood;
+import com.frog.agriculture.domain.TraceSellpro;
+import com.frog.agriculture.service.ITraceSellproService;
+import com.frog.agriculture.service.IMallProductConfigService;
+import com.frog.agriculture.domain.MallProductConfig;
 import com.frog.IaAgriculture.model.entity.IaPartition;
 import com.frog.IaAgriculture.vo.CommonContant;
 import com.frog.IaAgriculture.vo.ResultVO;
@@ -57,6 +61,10 @@ public class FishPartitionFoodService extends ServiceImpl<FishPartitionFoodMappe
     private BarcodeConfig barcodeConfig;
     @Autowired
     private PastureBatchMapper pastureBatchMapper;   //CropBatchMapper cropBatchMapper;
+    @Autowired
+    private ITraceSellproService traceSellproService;
+    @Autowired
+    private IMallProductConfigService mallProductConfigService;
 
     private FishPondTraceabData fishPondTraceabData;
 
@@ -77,6 +85,8 @@ public class FishPartitionFoodService extends ServiceImpl<FishPartitionFoodMappe
         BeanUtils.copyProperties(iaPartitionFood, insertBean);
         insertBean.setId(BaseUtil.getSnowflakeId());
         super.save(insertBean);
+        // 同步商城商品
+        syncTraceSellpro(insertBean, iaPartition);
 //        PartitionsService partitionsService = new PartitionsService(client, client.getCryptoSuite().getCryptoKeyPair(), cropBatch.getContractAddress());
 //        PartitionsAddFoodInputBO input = new PartitionsAddFoodInputBO();
 //        input.set_foodName(insertBean.getName());
@@ -207,6 +217,37 @@ public class FishPartitionFoodService extends ServiceImpl<FishPartitionFoodMappe
             }
         });
         return ResultVO.succeed(p);
+    }
+
+    /**
+     * 将成鱼捕捞记录同步为商城溯源商品
+     */
+    private void syncTraceSellpro(FishPartitionFood food, FishPartition fishPartition) {
+        try {
+            TraceSellpro exist = traceSellproService.selectByTraceCode(food.getId());
+            TraceSellpro bean = exist == null ? new TraceSellpro() : exist;
+            bean.setSellproName(food.getName());
+            bean.setSellproArea(fishPartition == null ? null : fishPartition.getPartitionName());
+            bean.setSellproWeight(food.getWeight() == null ? null : food.getWeight().toEngineeringString());
+            bean.setSellproGuige(food.getWeight() == null ? null : food.getWeight().toEngineeringString() + "kg");
+            bean.setStock(food.getWeight() == null ? null : food.getWeight().intValue());
+            bean.setCategory("鱼");
+            bean.setTraceCode(food.getId());
+            bean.setStatus("1");
+            // 匹配配置补充价格/封面（优先按溯源码匹配）
+            MallProductConfig cfg = mallProductConfigService.matchConfig(food.getName(), "鱼", fishPartition == null ? null : fishPartition.getId(), food.getId());
+            if (cfg != null) {
+                if (cfg.getPrice() != null) bean.setPrice(cfg.getPrice());
+                if (cfg.getCover() != null) bean.setSellproImg(cfg.getCover());
+            }
+            if (exist == null) {
+                traceSellproService.insertTraceSellpro(bean);
+            } else {
+                traceSellproService.updateTraceSellpro(bean);
+            }
+        } catch (Exception e) {
+            // 同步异常不影响主流程
+        }
     }
 
 

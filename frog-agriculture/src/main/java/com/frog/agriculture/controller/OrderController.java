@@ -3,6 +3,8 @@ package com.frog.agriculture.controller;
 import com.frog.common.core.controller.BaseController;
 import com.frog.common.core.domain.AjaxResult;
 import com.frog.common.core.page.TableDataInfo;
+import com.frog.agriculture.domain.TraceSellpro;
+import com.frog.agriculture.service.ITraceSellproService;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,6 +21,8 @@ public class OrderController extends BaseController {
 
     @Autowired(required = false)
     private JdbcTemplate jdbcTemplate;
+    @Autowired
+    private ITraceSellproService traceSellproService;
 
     @PostMapping("/create")
     public AjaxResult create(@RequestBody CreateOrderReq req) {
@@ -67,10 +71,10 @@ public class OrderController extends BaseController {
             try {
                 Map<String, Object> orderRow = jdbcTemplate.queryForMap("SELECT id, amount, status, create_time FROM mall_order WHERE id=?", id);
                 List<Map<String, Object>> items = jdbcTemplate.queryForList("SELECT sellpro_id, sellpro_name, sellpro_guige, sellpro_area, sellpro_img, price, quantity FROM mall_order_item WHERE order_id=?", id);
-                return AjaxResult.success(mapToOrder(orderRow, items));
+                return AjaxResult.success(enrichTrace(mapToOrder(orderRow, items)));
             } catch (Exception ignored) {}
         }
-        return AjaxResult.success(ORDERS.get(id));
+        return AjaxResult.success(enrichTrace(ORDERS.get(id)));
     }
 
     @GetMapping("/list")
@@ -80,12 +84,13 @@ public class OrderController extends BaseController {
             List<Map<String, Object>> rows = jdbcTemplate.queryForList("SELECT id, amount, status, create_time FROM mall_order ORDER BY create_time DESC");
             List<OrderDTO> list = new ArrayList<>();
             for (Map<String, Object> r : rows) {
-                list.add(mapToOrder(r, Collections.emptyList()));
+                list.add(enrichTrace(mapToOrder(r, Collections.emptyList())));
             }
             return getDataTable(list);
         } else {
             List<OrderDTO> list = new ArrayList<>(ORDERS.values());
             list.sort(Comparator.comparing(OrderDTO::getCreateTime).reversed());
+            list.replaceAll(this::enrichTrace);
             return getDataTable(list);
         }
     }
@@ -174,6 +179,8 @@ public class OrderController extends BaseController {
         private String sellproImg;
         private Double price;
         private Integer quantity;
+        private String traceCode;
+        private Long templateId;
     }
 
     @Data
@@ -183,5 +190,21 @@ public class OrderController extends BaseController {
         private List<OrderItem> items;
         private Double amount;
         private String status;
+    }
+
+    private OrderDTO enrichTrace(OrderDTO order) {
+        if (order == null || order.getItems() == null) return order;
+        for (OrderItem item : order.getItems()) {
+            if (item == null || item.getSellproId() == null) continue;
+            try {
+                TraceSellpro p = traceSellproService.selectTraceSellproBySellproId(item.getSellproId());
+                if (p != null) {
+                    item.setTraceCode(p.getTraceCode());
+                    item.setTemplateId(p.getTemplateId());
+                    if (item.getSellproImg() == null) item.setSellproImg(p.getSellproImg());
+                }
+            } catch (Exception ignored) {}
+        }
+        return order;
     }
 } 

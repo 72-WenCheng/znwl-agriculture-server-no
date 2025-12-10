@@ -32,8 +32,8 @@ ruoyi:
   # 实例演示开关
   demoEnabled: true
   # 文件路径，以uploadPath结尾 示例（ Windows配置 D:/uploadPath，Linux配置 /uploadPath, Mac /Users/xxx）
-  # D:\blockchain-zlxn\zlxn-aquaponics-backend\uploadPath
-  profile: D:\blockchain-zlxn\zlxn-aquaponics-backend\uploadPath
+  # 生产存储路径
+  profile: D:/zhnlrjcs/znwl-agriculture-server-no/uploadPath
 
   # 获取ip地址开关
   addressEnabled: true

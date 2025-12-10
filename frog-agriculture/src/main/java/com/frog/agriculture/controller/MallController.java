@@ -3,7 +3,11 @@ package com.frog.agriculture.controller;
 import com.frog.common.core.controller.BaseController;
 import com.frog.common.core.domain.AjaxResult;
 import com.frog.agriculture.domain.TraceSellpro;
+import com.frog.agriculture.domain.MallProductConfig;
+import com.frog.agriculture.service.IMallProductConfigService;
 import com.frog.agriculture.service.ITraceSellproService;
+import com.frog.agriculture.service.ITraceTemplateService;
+import com.frog.agriculture.service.ITraceCodeService;
 import com.github.pagehelper.PageInfo;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +28,12 @@ public class MallController extends BaseController {
 
     @Autowired
     private ITraceSellproService traceSellproService;
+    @Autowired
+    private ITraceTemplateService traceTemplateService;
+    @Autowired
+    private ITraceCodeService traceCodeService;
+    @Autowired
+    private IMallProductConfigService mallProductConfigService;
 
     /**
      * 商品分页列表（复用溯源产品数据）
@@ -37,6 +47,8 @@ public class MallController extends BaseController {
                            @RequestParam(value = "order", required = false) String order) {
         startPage();
         List<TraceSellpro> list = traceSellproService.selectTraceSellproList(query);
+        // 先套用商品配置（价格、封面），提高匹配宽容度
+        applyConfig(list);
         // 简单过滤：关键字匹配名称/规格/产地；分类以产地充当；价格区间
         List<TraceSellpro> filtered = list.stream().filter(p -> {
             boolean ok = true;
@@ -97,7 +109,24 @@ public class MallController extends BaseController {
     @GetMapping("/detail")
     public AjaxResult detail(@RequestParam("id") Long id) {
         TraceSellpro p = traceSellproService.selectTraceSellproBySellproId(id);
+        applyConfig(p);
         return AjaxResult.success(p);
+    }
+
+    /**
+     * 溯源聚合信息（直接给商城前端使用）
+     */
+    @GetMapping("/traceInfo")
+    public AjaxResult traceInfo(@RequestParam(value = "traceCode", required = false) String traceCode,
+                                @RequestParam(value = "templateId", required = false) Long templateId) {
+        Map<String, Object> data = new HashMap<>();
+        if (StringUtils.isNotBlank(traceCode)) {
+            data.put("code", traceCodeService.selectTraceCodeByTraceCode(traceCode));
+            data.put("template", traceTemplateService.getTraceTemplateByTraceCode(traceCode));
+        } else if (templateId != null) {
+            data.put("template", traceTemplateService.selectTraceTemplateByTemplateId(templateId));
+        }
+        return AjaxResult.success(data);
     }
 
     /** 简单推荐：返回前 N 条 */
@@ -116,5 +145,35 @@ public class MallController extends BaseController {
 
     private Double safePrice(TraceSellpro p) {
         try { Object v = p.getClass().getMethod("getPrice").invoke(p); return v==null?0.0:((Number)v).doubleValue(); } catch (Exception e) { return 0.0; }
+    }
+
+    /**
+     * 套用商品配置：优先名称+分类+分区，其次名称+分类（分区留空）
+     */
+    private void applyConfig(List<TraceSellpro> list) {
+        if (list == null || list.isEmpty()) {
+            return;
+        }
+        list.forEach(this::applyConfig);
+    }
+
+    private void applyConfig(TraceSellpro p) {
+        if (p == null) return;
+        MallProductConfig cfg = mallProductConfigService.matchConfig(p.getSellproName(), p.getCategory(), p.getSellproArea(), p.getTraceCode());
+        if (cfg != null) {
+            if (cfg.getPrice() != null) {
+                p.setPrice(cfg.getPrice());
+            }
+            if (StringUtils.isNotBlank(cfg.getCover())) {
+                p.setSellproImg(cfg.getCover());
+            }
+            // 备注/描述同步
+            if (StringUtils.isNotBlank(cfg.getRemark())) {
+                p.setRemark(cfg.getRemark());
+            }
+            // 保证可展示
+            p.setStatus("1");
+            p.setDelFlag("0");
+        }
     }
 } 
