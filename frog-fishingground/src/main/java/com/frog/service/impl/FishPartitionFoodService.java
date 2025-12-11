@@ -64,6 +64,8 @@ public class FishPartitionFoodService extends ServiceImpl<FishPartitionFoodMappe
     @Autowired
     private ITraceSellproService traceSellproService;
     @Autowired
+    private com.frog.agriculture.service.impl.TraceSellproServiceImpl traceSellproServiceImpl;
+    @Autowired
     private IMallProductConfigService mallProductConfigService;
 
     private FishPondTraceabData fishPondTraceabData;
@@ -235,10 +237,17 @@ public class FishPartitionFoodService extends ServiceImpl<FishPartitionFoodMappe
             bean.setTraceCode(food.getId());
             bean.setStatus("1");
             // 匹配配置补充价格/封面（优先按溯源码匹配）
-            MallProductConfig cfg = mallProductConfigService.matchConfig(food.getName(), "鱼", fishPartition == null ? null : fishPartition.getId(), food.getId());
+            MallProductConfig cfg = mallProductConfigService.matchConfig(food.getId());
             if (cfg != null) {
                 if (cfg.getPrice() != null) bean.setPrice(cfg.getPrice());
                 if (cfg.getCover() != null) bean.setSellproImg(cfg.getCover());
+            }
+            // 如果仍无封面或是默认图，按捕捞记录/物种兜底取图
+            if (bean.getSellproImg() == null || bean.getSellproImg().contains("/profile/default.jpg") || bean.getSellproImg().isEmpty()) {
+                String fishImg = traceSellproServiceImpl.findFishImgByTraceCode(food.getId());
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(fishImg)) {
+                    bean.setSellproImg(fishImg);
+                }
             }
             if (exist == null) {
                 traceSellproService.insertTraceSellpro(bean);

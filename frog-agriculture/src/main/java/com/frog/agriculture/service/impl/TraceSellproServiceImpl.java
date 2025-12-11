@@ -33,6 +33,29 @@ public class TraceSellproServiceImpl implements ITraceSellproService
     private TraceVersionMapper traceVersionMapper;
     @Autowired
     private TraceCodeMapper traceCodeMapper;
+
+    /**
+     * 根据溯源码查询溯源产品，若图片为空/默认则尝试回填物种图
+     */
+    public TraceSellpro selectByTraceCodeWithImg(String traceCode) {
+        TraceSellpro t = traceSellproMapper.selectTraceSellproByTraceCode(traceCode);
+        if (t != null) {
+            String img = t.getSellproImg();
+            if (org.apache.commons.lang3.StringUtils.isBlank(img) || img.contains("/profile/default.jpg")) {
+                String fishImg = findFishImgByTraceCode(traceCode);
+                if (org.apache.commons.lang3.StringUtils.isNotBlank(fishImg)) {
+                    t.setSellproImg(fishImg);
+                }
+            }
+        }
+        return t;
+    }
+    /**
+     * 捕捞/采摘溯源码回溯物种图
+     */
+    public String findFishImgByTraceCode(String traceCode) {
+        return traceSellproMapper.selectFishImgByTraceCode(traceCode);
+    }
     /**
      * 查询溯源产品
      * 

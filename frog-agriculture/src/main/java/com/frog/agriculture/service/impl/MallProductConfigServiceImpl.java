@@ -52,40 +52,23 @@ public class MallProductConfigServiceImpl implements IMallProductConfigService {
     }
 
     @Override
-    public MallProductConfig matchConfig(String name, String category, String partitionId, String traceCode) {
+    public MallProductConfig matchConfig(String traceCode) {
+        if (StringUtils.isBlank(traceCode)) {
+            return null;
+        }
         MallProductConfig query = new MallProductConfig();
-        // 1) 溯源码优先（支持前缀匹配：配置的 trace_code 是商品 trace_code 的前缀也算匹配）
-        if (StringUtils.isNotBlank(traceCode)) {
-            // 先精确匹配
-            query.setTraceCode(traceCode);
-            List<MallProductConfig> list = configMapper.selectMallProductConfigList(query);
-            if (!list.isEmpty()) {
-                return list.get(0);
-            }
-            // 再前缀匹配：配置的 trace_code LIKE 商品 trace_code%
-            List<MallProductConfig> prefixList = configMapper.selectByTraceCodePrefix(traceCode);
-            if (!prefixList.isEmpty()) {
-                return prefixList.get(0);
-            }
-        }
-
-        // 2) 名称+分类+分区
-        query = new MallProductConfig();
-        query.setCategory(category);
-        query.setName(name);
-        if (StringUtils.isNotBlank(partitionId)) {
-            query.setPartitionId(partitionId);
-            List<MallProductConfig> list = configMapper.selectMallProductConfigList(query);
-            if (!list.isEmpty()) {
-                return list.get(0);
-            }
-        }
-
-        // 3) 名称+分类（分区留空）
-        query.setPartitionId(null);
+        // 仅匹配启用的配置
+        query.setStatus("1");
+        // 先精确匹配
+        query.setTraceCode(traceCode);
         List<MallProductConfig> list = configMapper.selectMallProductConfigList(query);
         if (!list.isEmpty()) {
             return list.get(0);
+        }
+        // 再前缀匹配：配置的 trace_code LIKE 商品 trace_code%
+        List<MallProductConfig> prefixList = configMapper.selectByTraceCodePrefix(traceCode);
+        if (!prefixList.isEmpty()) {
+            return prefixList.get(0);
         }
         return null;
     }

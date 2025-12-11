@@ -26,6 +26,10 @@ public class MallProductConfig extends BaseEntity {
     @Excel(name = "价格")
     private Double price;
 
+    /** 库存 */
+    @Excel(name = "库存")
+    private Integer stock;
+
     /** 封面图 */
     private String cover;
 

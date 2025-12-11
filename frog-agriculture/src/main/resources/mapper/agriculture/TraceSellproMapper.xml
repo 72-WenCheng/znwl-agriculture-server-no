@@ -54,6 +54,36 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <include refid="selectTraceSellproVo"/>
         where trace_code = #{traceCode} and del_flag=0
     </select>
+
+    <!-- 捕捞/采摘溯源码 -> 鱼分区 -> 物种图 -->
+    <!-- 溯源码 -> 捕捞/采摘记录 -> 分区/批次 -> 物种图（尽量锁定唯一 species_id） -->
+    <select id="selectFishImgByTraceCode" parameterType="String" resultType="String">
+        SELECT fs.fish_species_img
+        FROM fish_species fs
+        WHERE fs.species_id = (
+            SELECT MIN(fs2.species_id)
+            FROM fish_partition_food fpf
+                     LEFT JOIN fish_partition fp ON fpf.fish_partition_id = fp.id
+                     LEFT JOIN fish_species fs2
+                               ON fp.variety = fs2.species_id
+                                   OR fp.variety = fs2.fish_name
+                                   OR fp.variety = fs2.fish_species_name
+                                   OR fpf.name = fs2.fish_name
+                                   OR fpf.name = fs2.fish_species_name
+            WHERE fpf.id = #{traceCode}
+        )
+        LIMIT 1
+    </select>
+
+    <!-- 仅按名称匹配物种图（取 species_id 最小的一条） -->
+    <select id="selectFishImgByName" parameterType="String" resultType="String">
+        SELECT fs.fish_species_img
+        FROM fish_species fs
+        WHERE fs.fish_name = #{name}
+           OR fs.fish_species_name = #{name}
+        ORDER BY fs.species_id
+        LIMIT 1
+    </select>
         
     <insert id="insertTraceSellpro" parameterType="TraceSellpro" useGeneratedKeys="true" keyProperty="sellproId">
         insert into agriculture_trace_sellpro

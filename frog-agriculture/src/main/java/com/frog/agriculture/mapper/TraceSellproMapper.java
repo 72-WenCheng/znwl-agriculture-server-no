@@ -35,6 +35,16 @@ public interface TraceSellproMapper
     public TraceSellpro selectTraceSellproByTraceCode(String traceCode);
 
     /**
+     * 通过溯源码（捕捞/采摘记录ID）回溯鱼类种质图片
+     */
+    public String selectFishImgByTraceCode(String traceCode);
+
+    /**
+     * 按名称匹配物种图（取 species_id 最小的一条）
+     */
+    public String selectFishImgByName(String name);
+
+    /**
      * 新增溯源产品
      * 
      * @param traceSellpro 溯源产品

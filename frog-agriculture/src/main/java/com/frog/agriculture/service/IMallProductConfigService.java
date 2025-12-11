@@ -19,8 +19,8 @@ public interface IMallProductConfigService {
     int deleteMallProductConfigById(Long id);
 
     /**
-     * 按溯源码优先匹配，其次名称+分类+分区，再次名称+分类
+     * 按溯源码匹配（精确 -> 前缀），未提供溯源码则返回 null
      */
-    MallProductConfig matchConfig(String name, String category, String partitionId, String traceCode);
+    MallProductConfig matchConfig(String traceCode);
 }
 

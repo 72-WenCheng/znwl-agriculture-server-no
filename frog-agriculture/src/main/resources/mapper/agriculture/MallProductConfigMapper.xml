@@ -10,6 +10,7 @@
         <result property="category" column="category"/>
         <result property="partitionId" column="partition_id"/>
         <result property="price" column="price"/>
+        <result property="stock" column="stock"/>
         <result property="cover" column="cover"/>
         <result property="status" column="status"/>
         <result property="remark" column="remark"/>
@@ -21,7 +22,7 @@
     </resultMap>
 
     <sql id="selectConfigVo">
-        select id,name,category,partition_id,price,cover,status,remark,create_by,create_time,update_by,update_time,trace_code
+        select id,name,category,partition_id,price,stock,cover,status,remark,create_by,create_time,update_by,update_time,trace_code
         from agriculture_mall_product_config
     </sql>
 
@@ -43,9 +44,9 @@
 
     <insert id="insertMallProductConfig" parameterType="com.frog.agriculture.domain.MallProductConfig" useGeneratedKeys="true" keyProperty="id">
         insert into agriculture_mall_product_config
-        (name, category, partition_id, price, cover, status, remark, trace_code, create_by, create_time, update_by, update_time)
+        (name, category, partition_id, price, stock, cover, status, remark, trace_code, create_by, create_time, update_by, update_time)
         values
-        (#{name}, #{category}, #{partitionId}, #{price}, #{cover}, #{status}, #{remark}, #{traceCode}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime})
+        (#{name}, #{category}, #{partitionId}, #{price}, #{stock}, #{cover}, #{status}, #{remark}, #{traceCode}, #{createBy}, #{createTime}, #{updateBy}, #{updateTime})
     </insert>
 
     <update id="updateMallProductConfig" parameterType="com.frog.agriculture.domain.MallProductConfig">
@@ -55,6 +56,7 @@
             <if test="category != null">category=#{category},</if>
             <if test="partitionId != null">partition_id=#{partitionId},</if>
             <if test="price != null">price=#{price},</if>
+            <if test="stock != null">stock=#{stock},</if>
             <if test="cover != null">cover=#{cover},</if>
             <if test="status != null">status=#{status},</if>
             <if test="remark != null">remark=#{remark},</if>

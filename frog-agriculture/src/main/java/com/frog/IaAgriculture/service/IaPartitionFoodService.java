@@ -23,6 +23,8 @@ import com.frog.agriculture.domain.TraceSellpro;
 import com.frog.agriculture.service.ITraceSellproService;
 import com.frog.agriculture.service.IMallProductConfigService;
 import com.frog.agriculture.domain.MallProductConfig;
+import com.frog.agriculture.mapper.GermplasmMapper;
+import com.frog.agriculture.domain.Germplasm;
 import vip.blockchain.agriculture.model.bo.PartitionsAddFoodInputBO;
 import vip.blockchain.agriculture.model.bo.PartitionsModifyFoodInputBO;
 import vip.blockchain.agriculture.model.bo.PartitionsRemoverFoodInputBO;
@@ -51,6 +53,8 @@ public class IaPartitionFoodService extends ServiceImpl<IaPartitionFoodMapper, I
     private ITraceSellproService traceSellproService;
     @Autowired
     private IMallProductConfigService mallProductConfigService;
+    @Autowired
+    private GermplasmMapper germplasmMapper;
 
 
     @Transactional(rollbackFor = Exception.class)
@@ -202,10 +206,19 @@ public class IaPartitionFoodService extends ServiceImpl<IaPartitionFoodMapper, I
             bean.setTraceCode(food.getId());
             bean.setStatus("1");
             // 匹配配置补充价格/封面（优先按溯源码匹配）
-            MallProductConfig cfg = mallProductConfigService.matchConfig(food.getName(), "农作物", iaPartition == null ? null : iaPartition.getId(), food.getId());
+            MallProductConfig cfg = mallProductConfigService.matchConfig(food.getId());
             if (cfg != null) {
                 if (cfg.getPrice() != null) bean.setPrice(cfg.getPrice());
                 if (cfg.getCover() != null) bean.setSellproImg(cfg.getCover());
+            }
+            // 如果封面为空或默认图，尝试用种质图片兜底
+            if (bean.getSellproImg() == null || bean.getSellproImg().contains("/profile/default.jpg") || bean.getSellproImg().isEmpty()) {
+                if (cropBatch != null && cropBatch.getGermplasmId() != null) {
+                    Germplasm germplasm = germplasmMapper.selectGermplasmByGermplasmId(cropBatch.getGermplasmId());
+                    if (germplasm != null && org.apache.commons.lang3.StringUtils.isNotBlank(germplasm.getGermplasmImg())) {
+                        bean.setSellproImg(germplasm.getGermplasmImg());
+                    }
+                }
             }
             if (exist == null) {
                 traceSellproService.insertTraceSellpro(bean);
